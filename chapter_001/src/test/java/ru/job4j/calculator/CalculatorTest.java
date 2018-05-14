@@ -23,19 +23,10 @@ public class CalculatorTest {
         assertThat(result, is(expected));
     }
     @Test
-    public void whenSubtruct2On1Then1() {
+    public void whenDiv2On2Then1() {
         Calculator calc = new Calculator();
-        calc.subtruck(2D, 1D);
-        double subtruck = calc.getResult();
-        double expected = 1D;
-        assertThat(subtruck, is(expected));
-    }
-
-    @Test
-    public void whenDiv1On1Then1() {
-        Calculator calc = new Calculator();
-        calc.add(1D, 1D);
-        double div = calc.getResult();
+        calc.add1(2D, 2D);
+        double div = calc.getResult1();
         double expected = 1D;
         assertThat(div, is(expected));
     }
@@ -43,13 +34,19 @@ public class CalculatorTest {
     @Test
     public void whenMultiple1On1Then1() {
         Calculator calc = new Calculator();
-        calc.add(1D, 1D);
-        double multiple = calc.getResult();
+        calc.add2(1D, 1D);
+        double multiple = calc.getResult2();
         double expected = 1D;
         assertThat(multiple, is(expected));
     }
 
-
-
+    @Test
+    public void whenSubtraction2On1Then0() {
+        Calculator calc = new Calculator();
+        calc.add3(2D, 1D);
+        double subtraction = calc.getResult3();
+        double expected = 1D;
+        assertThat(subtraction, is(expected));
+    }
 
 }

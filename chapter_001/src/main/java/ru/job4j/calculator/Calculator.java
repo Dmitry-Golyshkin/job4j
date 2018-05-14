@@ -9,7 +9,7 @@ package ru.job4j.calculator;
  */
 
 public class Calculator {
-    private double result;  // summ operation
+        public double result;  // summ operation
 
    public void add(double first, double second) {
         this.result = first + second;
@@ -20,34 +20,33 @@ public class Calculator {
         return this.result;
     }
 
-    private double subtruck; // subtruck operation
-
-    public void subtruck,(double first, double second) {
-        this.subtruck = first - second;
-    }
-
-    public double getResult() {
-        return this.subtruck;
-    }
-
     private double div; // division operation
 
-    public void add(double first, double second) {
+    public void add1(double first, double second) {
         this.div = first / second;
     }
 
-    public double getResult() {
+    public double getResult1() {
         return this.div;
     }
 
     private double multiple; // multiplication operation
 
-    public void add(double first, double second) {
+    public void add2(double first, double second) {
         this.multiple = first * second;
     }
 
-    public double getResult() {
+    public double getResult2() {
         return this.multiple;
     }
 
+    private double subtraction; // subtraction operation
+
+    public void add3(double first, double second) {
+        this.subtraction = first - second;
+    }
+
+    public double getResult3() {
+        return this.subtraction;
+    }
 }
