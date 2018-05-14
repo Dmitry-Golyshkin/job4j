@@ -48,5 +48,4 @@ public class CalculatorTest {
         double expected = 1D;
         assertThat(subtraction, is(expected));
     }
-
 }

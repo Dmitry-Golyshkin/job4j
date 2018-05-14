@@ -39,7 +39,6 @@ public class Calculator {
     public double getResult2() {
         return this.multiple;
     }
-
     private double subtraction; // subtraction operation
 
     public void add3(double first, double second) {
