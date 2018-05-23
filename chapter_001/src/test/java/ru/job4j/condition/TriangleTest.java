@@ -21,7 +21,7 @@ public class TriangleTest {
         Point c = new Point(2, 0);
         Triangle triangle = new Triangle(a, b, c);
         double result = triangle.area();
-        //почему при -1 тест не выпадает в ошибку?
+        //почему при -1 тест не выпадает в ошибку??
         double expected = -1D;
         assertThat(result, closeTo(expected, 0.1));
     }
