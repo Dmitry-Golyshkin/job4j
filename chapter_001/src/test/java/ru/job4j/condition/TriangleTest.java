@@ -2,8 +2,9 @@ package ru.job4j.condition;
 
 import org.junit.Test;
 
-import static org.hamcrest.number.IsCloseTo.closeTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.number.IsCloseTo.*;
+import static org.junit.Assert.*;
+
 /**
  * Test for Calculating the area of a triangle.
  *
@@ -20,7 +21,8 @@ public class TriangleTest {
         Point c = new Point(2, 0);
         Triangle triangle = new Triangle(a, b, c);
         double result = triangle.area();
-        double expected = 2D;
+        //почему при -1 тест не выпадает в ошибку?
+        double expected = -1D;
         assertThat(result, closeTo(expected, 0.1));
     }
 }
