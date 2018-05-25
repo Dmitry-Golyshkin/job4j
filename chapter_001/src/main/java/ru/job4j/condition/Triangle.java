@@ -1,5 +1,11 @@
 package ru.job4j.condition;
-
+/**
+ * Area of a triangle.
+ *
+ * @author Dmitry Golyshkin (mailerema@gmail.com)
+ * @version $Id$
+ * @since 25.05.2018
+ */
 
 public class Triangle {
     private Point a;
@@ -27,12 +33,10 @@ public class Triangle {
         }
         return rsl;
     }
-
     private boolean exist(double ab, double ac, double bc) {
-        //Подумайте какое надо написать условие, чтобы определить можно ли построить треугольник?
-        // (bc <= ac + ab, ac <= bc + ab, ab <= bc + ac)-при данном условии начертить треугольник нельзя
-        // только как это реализовать в синтаксисе языка???
-        return false;
+        if (bc <= ac + ab && ac <= bc + ab && ab <= bc + ac)
+            return true;
+        else
+            return false;
     }
-
 }

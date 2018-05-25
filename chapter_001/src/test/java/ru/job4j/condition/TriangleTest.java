@@ -10,19 +10,18 @@ import static org.junit.Assert.*;
  *
  * @author Dmitry Golyshkin (mailerema@gmail.com)
  * @version $Id$
- * @since 16.05.2018
+ * @since 25.05.2018
  */
 
 public class TriangleTest {
     @Test
     public void whenAreaSetThreePointsThenTriangleArea() {
-        Point a = new Point(0, 0);
-        Point b = new Point(0, 2);
-        Point c = new Point(2, 0);
+        Point a = new Point(4, 1);
+        Point b = new Point(0, 1);
+        Point c = new Point(2, 4);
         Triangle triangle = new Triangle(a, b, c);
         double result = triangle.area();
-        //почему при -1 тест не выпадает в ошибку???
-        double expected = -1D;
+        double expected = 6D;
         assertThat(result, closeTo(expected, 0.1));
     }
 }
