@@ -34,6 +34,6 @@ public class Triangle {
         return rsl;
     }
     private boolean exist(double ab, double ac, double bc) {
-        return  (bc <= ac + ab && ac <= bc + ab && ab <= bc + ac);
+        return  bc < ac + ab && ac < bc + ab && ab < bc + ac;
     }
 }
