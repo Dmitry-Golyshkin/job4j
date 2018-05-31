@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 
+
 public class PaintTest {
     @Test
     public void whenPyramid4Right() {
