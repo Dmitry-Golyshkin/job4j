@@ -1,7 +1,7 @@
 package ru.job4j.array;
 
 /**
- * Класический поиск перебором. Тест.
+ * Перевернуть массив. Тест.
  * @author Dmitry Golyshkin (mailerema@gmail.com)
  * @version $Id$
  * @since 04.06.2018
