@@ -10,8 +10,8 @@ public class Check {
     public boolean mono(boolean[] data) {
         boolean result = false;
         for (int j = 0; j < data.length - 1; j++) {
-            result = data[j] == data[j + 1];
             if (!result) {
+                result = data[j] == data[j + 1];
                 break;
             }
         }
