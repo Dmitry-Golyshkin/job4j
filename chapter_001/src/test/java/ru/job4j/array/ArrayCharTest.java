@@ -4,7 +4,7 @@ package ru.job4j.array;
  * @Test ArrayChar. Слова начинается с...
  * @author @author Dmitry Golyshkin (mailerema@gmail.com)
  * @version $Id$
- * @since 06.06.2018
+ * @since 07.06.2018
  */
 
 import org.junit.Test;
@@ -32,4 +32,11 @@ public class ArrayCharTest {
         boolean result = word.startWith("Wod");
         assertThat(result, is(false));
     }
+    @Test
+    public void whenThePrefixIsLongerThanTheWorld() {
+        ArrayChar word = new ArrayChar("World");
+        boolean result = word.startWith("Wodtrewq");
+        assertThat(result, is(false));
+    }
+
 }
