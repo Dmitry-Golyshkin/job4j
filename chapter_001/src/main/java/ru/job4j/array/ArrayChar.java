@@ -19,13 +19,17 @@ public class ArrayChar {
     public boolean startWith(String prefix) {
         boolean result = true;
         char[] value = prefix.toCharArray();
-        for (int j = 0; j < value.length; j++){
-            if (this.data [j] != value[j]){
-                result = false;
-                break;
+
+        if (data.length >= value.length){
+            for (int j = 0; j < value.length; j++) {
+                if (data[j] != value[j]) {
+                    result = false;
+                }
             }
         }
-
+        else {
+            result = false;
+        }
         return result;
     }
 }

@@ -39,4 +39,10 @@ public class ArrayCharTest {
         assertThat(result, is(false));
     }
 
+    @Test
+    public void whenStartWithPrefixThenTrue2() {
+        ArrayChar word = new ArrayChar("Hello");
+        boolean result = word.startWith("Helloo");
+        assertThat(result, is(false));
+    }
 }
