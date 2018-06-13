@@ -14,10 +14,12 @@ public class MatrixCheck {
         for (int k = 0; k != data.length - 1; k++) {
             if (data[0][0] != data[k][k]){
                 result = false;
+                break;
             }
 
             if (data[k][(data.length - 1) - k] != data[k + 1][(data.length - 1) - (k + 1) ]) {
                 result = false;
+                break;
             }
         }
         return result;
