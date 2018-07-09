@@ -2,11 +2,13 @@ package ru.job4j.tictactoe;
 
 /**
  * Class Logic3T. Логика игра крестики/нолики.
+ *
  * @author @author Dmitry Golyshkin (mailerema@gmail.com)
  * @version $Id$
- * @since 18.06.2018
+ * @since 09.07.2018
  */
 
+import java.util.function.Predicate;
 
 public class Logic3T {
     private final Figure3T[][] table;
@@ -15,66 +17,81 @@ public class Logic3T {
         this.table = table;
     }
 
+    /**
+     * isWinnerX.
+     * This method , check winning positions of X.
+     *
+     * @return result
+     */
     public boolean isWinnerX() {
-        boolean value = true;
-        //Check the diagonal (left top, right bottom).
-        if (table[0][0].hasMarkX() == value && table[1][1].hasMarkX() == value && table[2][2].hasMarkX() == value ){
-          return true;
-        }
-        //Check the diagonal (left bottom,right top).
-        if (table[2][0].hasMarkX() == value && table[1][1].hasMarkX() == value && table[0][2].hasMarkX() == value) {
-            return true;
-        }
-        //Check the row.
-        for (int row = 0; row != table.length; row++) {
-            if (table[row][0].hasMarkX() == value && table[row][1].hasMarkX() == value && table[row][2].hasMarkX() == value) {
-                return true;
-            }
-        }
-        //Check the column.
-        for (int column = 0; column != table.length; column++) {
-            if (table[0][column].hasMarkX() == value && table[1][column].hasMarkX() == value && table[2][column].hasMarkX() == value) {
-                return true;
-            }
-        }
-        return false;
+        return this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0)
+                || this.fillBy(Figure3T::hasMarkX, 0, 0, 0, 1)
+                || this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1)
+                || this.fillBy(Figure3T::hasMarkX, 1, 0, 0, 1)
+                || this.fillBy(Figure3T::hasMarkX, 2, 0, 0, 1)
+                || this.fillBy(Figure3T::hasMarkX, 0, 1, 1, 0)
+                || this.fillBy(Figure3T::hasMarkX, 0, 2, 1, 0)
+                || this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, -1, 1);
     }
+
+    /**
+     * isWinnerO.
+     * This method , check winning positions of O.
+     *
+     * @return result.
+     */
 
     public boolean isWinnerO() {
-        boolean value = true;
-        //Check the diagonal (left top, right bottom).
-        if (table[0][0].hasMarkO() == value && table[1][1].hasMarkO() == value && table[2][2].hasMarkO() == value) {
-            return true;
-        }
-        //Check the diagonal (left bottom,right top).
-        if (table[2][0].hasMarkO() == value && table[1][1].hasMarkO() == value && table[0][2].hasMarkO() == value) {
-            return true;
-        }
-        //Check the row.
-        for (int row = 0; row != table.length; row++) {
-            if (table[row][0].hasMarkO() == value && table[row][1].hasMarkO() == value && table[row][2].hasMarkO() == value) {
-                return true;
-            }
-        }
-        //Check the column.
-        for (int column = 0; column != table.length; column++) {
-            if (table[0][column].hasMarkO() == value && table[1][column].hasMarkO() == value && table[2][column].hasMarkO() == value) {
-                return true;
-            }
-        }
-        return false;
+        return this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 0)
+                || this.fillBy(Figure3T::hasMarkO, 0, 0, 0, 1)
+                || this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1)
+                || this.fillBy(Figure3T::hasMarkO, 1, 0, 0, 1)
+                || this.fillBy(Figure3T::hasMarkO, 2, 0, 0, 1)
+                || this.fillBy(Figure3T::hasMarkO, 0, 1, 1, 0)
+                || this.fillBy(Figure3T::hasMarkO, 0, 2, 1, 0)
+                || this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
     }
 
+    /**
+     * hacGap.
+     * This method checks whether there are positions for moves.
+     *
+     * @return result.
+     */
     public boolean hasGap() {
-        boolean value = false;
-        //Check other options.
-        for (int out = 0; out != table.length; out++) {
-            for (int in = 0; in != table.length; in++) {
-                if ((table[out][in].hasMarkX() == value) && (table[out][in].hasMarkO() == value)) {
-                    return true;
+        boolean result = false;
+        for (int out = 0; out < table.length; out++) {
+            for (int in = 0; in < table.length; in++) {
+                if (table[out][in] != null) {
+                    result = true;
                 }
             }
         }
-        return false;
+        return result;
+    }
+
+    /**
+     * fillBy.
+     * This method check winning positions.
+     *
+     * @param predicate - O or X.
+     * @param startX    - start position X.
+     * @param startY    - start position Y.
+     * @param deltaX    - offset X.
+     * @param deltaY    - offset Y.
+     * @return result
+     */
+    public boolean fillBy(Predicate<Figure3T> predicate, int startX, int startY, int deltaX, int deltaY) {
+        boolean result = true;
+        for (int index = 0; index != this.table.length; index++) {
+            Figure3T cell = this.table[startX][startY];
+            startX += deltaX;
+            startY += deltaY;
+            if (!predicate.test(cell)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 }
