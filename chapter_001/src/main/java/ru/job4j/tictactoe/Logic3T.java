@@ -59,15 +59,15 @@ public class Logic3T {
      * @return result.
      */
     public boolean hasGap() {
-        boolean result = false;
+        boolean value = false;
         for (int out = 0; out < table.length; out++) {
             for (int in = 0; in < table.length; in++) {
-                if (table[out][in] != null) {
-                    result = true;
+                if (((table[out][in].hasMarkX() == value) && (table[out][in].hasMarkO() == value)) ) {
+                    value = true;
                 }
             }
         }
-        return result;
+        return value;
     }
 
     /**
