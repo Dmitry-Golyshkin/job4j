@@ -1,3 +1,5 @@
+package ru.job4j.tictactoe;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -13,11 +15,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-import ru.job4j.tictactoe.Figure3T;
-import ru.job4j.tictactoe.Logic3T;
 
 public class TicTacToe extends Application {
-    private static final String JOB4J = "Крестики-нолики job4j";
+    private static final String JOB4J = "Крестики-нолики www.job4j.ru";
     private final int size = 3;
     private final Figure3T[][] cells = new Figure3T[size][size];
     private final Logic3T logic = new Logic3T(cells);
@@ -106,7 +106,7 @@ public class TicTacToe extends Application {
         Group panel = new Group();
         for (int y = 0; y != this.size; y++) {
             for (int x = 0; x != this.size; x++) {
-               Figure3T rect = this.buildRectangle(x, y, 50);
+                Figure3T rect = this.buildRectangle(x, y, 50);
                 this.cells[y][x] = rect;
                 panel.getChildren().add(rect);
                 rect.setOnMouseClicked(this.buildMouseEvent(panel));

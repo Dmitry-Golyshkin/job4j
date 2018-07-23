@@ -1,5 +1,5 @@
 /**
-* Package for calculate task.
+* Package for profession class tasks.
 *
 * @author Dmitry Golyshkin (mailerema@gmail.com)
 * @version $Id$

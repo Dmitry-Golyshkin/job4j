@@ -53,24 +53,6 @@ public class Logic3T {
     }
 
     /**
-     * hacGap.
-     * This method checks whether there are positions for moves.
-     *
-     * @return result.
-     */
-    public boolean hasGap() {
-        boolean value = false;
-        for (int out = 0; out < table.length; out++) {
-            for (int in = 0; in < table.length; in++) {
-                if (((table[out][in].hasMarkX() == value) && (table[out][in].hasMarkO() == value)) ) {
-                    value = true;
-                }
-            }
-        }
-        return value;
-    }
-
-    /**
      * fillBy.
      * This method check winning positions.
      *
@@ -93,5 +75,23 @@ public class Logic3T {
             }
         }
         return result;
+    }
+
+    /**
+     * hacGap.
+     * This method checks whether there are positions for moves.
+     *
+     * @return result.
+     */
+    public boolean hasGap() {
+        boolean value = false;
+        for (int x = 0; x < table.length; x++) {
+            for (int y = 0; y < table.length; y++) {
+                if (!this.table[x][y].hasMarkX() && !this.table[x][y].hasMarkO()  ) {
+                    value = true;
+                }
+            }
+        }
+        return value;
     }
 }
