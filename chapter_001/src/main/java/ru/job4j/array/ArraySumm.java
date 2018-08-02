@@ -13,6 +13,7 @@ public class ArraySumm {
         int b = arr2.length - 1;
         int c = arr3.length;
 
+
         while (c > 0)
             arr3[--c] = (b < 0 || (a >= 0 && arr1[a] >= arr2[b])) ? arr1[a--] : arr2 [b--];
         return arr3;
