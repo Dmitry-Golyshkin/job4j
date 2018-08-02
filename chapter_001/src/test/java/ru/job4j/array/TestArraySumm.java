@@ -15,6 +15,7 @@ public class TestArraySumm {
         int[] expect = new int[] {1,2,3,3,5,6,7};
         assertThat(result, is(expect));
 
+
     }
 
     @Test
@@ -25,6 +26,7 @@ public class TestArraySumm {
         int[] result = array.arraysumm(arr1,arr2);
         int[] expect = new int[] {1,2,3,4,5,6,7,8,8,9,10,11,11,13};
         assertThat(result, is(expect));
+
 
     }
 }
