@@ -41,20 +41,21 @@ public class Tracker {
      * The Method delete items.
      * @param id of the item
      */
-    public void delete(String id){
+    public boolean delete(String id){
         for(int i = 0; i < position; i++){
             if (this.items[i] != null && this.items[i].getId().equals(id)) {
                 System.arraycopy(this.items, i + 1, this.items, i, this.items.length - 1 - i);
                 items[position--] = null;
             }
         }
+        return false;
     }
 
     /**
      * The method replace items.
      * @param id of item
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
         for (int i = 0; i < position; i++) {
             if (id.equals(items[i].getId())) {
                 item.setId(id);
@@ -62,6 +63,7 @@ public class Tracker {
                 break;
             }
         }
+        return false;
     }
     /**
      * The method get all items.
