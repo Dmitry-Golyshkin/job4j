@@ -5,7 +5,7 @@ package ru.job4j.tracker;
  *
  * @author @author Dmitry Golyshkin (mailerema@gmail.com)
  * @version $Id$
- * @since 17.08.2018
+ * @since 19.08.2018
  */
 
 import java.util.*;
@@ -46,6 +46,7 @@ public class Tracker {
             if (this.items[i] != null && this.items[i].getId().equals(id)) {
                 System.arraycopy(this.items, i + 1, this.items, i, this.items.length - 1 - i);
                 items[position--] = null;
+                break;
             }
         }
         return false;
@@ -71,11 +72,7 @@ public class Tracker {
      * @return list of items.
      */
     public Item[] findall() {
-        Item[] result = new Item[this.position];
-        for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
-        }
-        return result;
+        return Arrays.copyOf(items, position);
     }
 
     /**
@@ -91,7 +88,7 @@ public class Tracker {
                 count++;
             }
         }
-        return result;
+        return Arrays.copyOf(result, count);
     }
     /**
      * The method get item by id.
