@@ -5,7 +5,7 @@ package ru.job4j.tracker;
  *
  * @author @author Dmitry Golyshkin (mailerema@gmail.com)
  * @version $Id$
- * @since 17.08.2018
+ * @since 19.08.2018
  */
 
 import java.util.*;
@@ -41,20 +41,22 @@ public class Tracker {
      * The Method delete items.
      * @param id of the item
      */
-    public void delete(String id){
+    public boolean delete(String id){
         for(int i = 0; i < position; i++){
             if (this.items[i] != null && this.items[i].getId().equals(id)) {
                 System.arraycopy(this.items, i + 1, this.items, i, this.items.length - 1 - i);
                 items[position--] = null;
+                break;
             }
         }
+        return false;
     }
 
     /**
      * The method replace items.
      * @param id of item
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
         for (int i = 0; i < position; i++) {
             if (id.equals(items[i].getId())) {
                 item.setId(id);
@@ -62,6 +64,7 @@ public class Tracker {
                 break;
             }
         }
+        return false;
     }
     /**
      * The method get all items.
@@ -69,11 +72,7 @@ public class Tracker {
      * @return list of items.
      */
     public Item[] findall() {
-        Item[] result = new Item[this.position];
-        for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
-        }
-        return result;
+        return Arrays.copyOf(items, position);
     }
 
     /**
@@ -89,7 +88,7 @@ public class Tracker {
                 count++;
             }
         }
-        return result;
+        return Arrays.copyOf(result, count);
     }
     /**
      * The method get item by id.
