@@ -1,9 +1,9 @@
 package ru.job4j.tracker;
 
 /**
- * @autor Dmitry Golyshkin (mailto: mailerema@gmail.com)
  * @version $Id$
- * @sinse 18.08.18
+ * @autor Dmitry Golyshkin (mailto: mailerema@gmail.com)
+ * @sinse 05.10.18
  */
 
 public class StartUI {
@@ -15,7 +15,7 @@ public class StartUI {
     /**
      * Const for Show all items.
      */
-    private static final String ShowAll = "1";
+    private static final String Show_All = "1";
 
     /**
      * Const for Edit item.
@@ -30,12 +30,12 @@ public class StartUI {
     /**
      * Const for Find item by id.
      */
-    private static final String FindByID = "4";
+    private static final String Find_By_ID = "4";
 
     /**
      * Const for Find item by name.
      */
-    private static final String FindByName = "5";
+    private static final String Find_By_Name = "5";
 
     /**
      * Константа для выхода из цикла.
@@ -53,7 +53,8 @@ public class StartUI {
 
     /**
      * Конструтор инициализирующий поля.
-     * @param input ввод данных.
+     *
+     * @param input   ввод данных.
      * @param tracker хранилище заявок.
      */
     public StartUI(ConsoleInput input, Tracker tracker) {
@@ -71,15 +72,15 @@ public class StartUI {
             String answer = this.input.ask("Введите пункт меню : ");
             if (ADD.equals(answer)) {
                 this.createItem();
-            } else if (ShowAll.equals(answer)) {
+            } else if (Show_All.equals(answer)) {
                 this.findAll();
             } else if (Edit.equals(answer)) {
                 this.editItem();
             } else if (Delete.equals(answer)) {
                 this.deleteItem();
-            } else if (FindByID.equals((answer))) {
+            } else if (Find_By_ID.equals((answer))) {
                 this.findItemByID();
-            } else if (FindByName.equals(answer)){
+            } else if (Find_By_Name.equals(answer)) {
                 this.findByName();
             } else if (EXIT.equals(answer)) {
                 exit = true;
@@ -96,7 +97,7 @@ public class StartUI {
         String desc = this.input.ask("Введите описание заявки :");
 
         //String id,String name,String description, long create
-        Item item = new Item(name, desc,System.currentTimeMillis());
+        Item item = new Item(name, desc, System.currentTimeMillis());
         this.tracker.add(item);
         System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
     }
@@ -104,55 +105,61 @@ public class StartUI {
     /**
      * The method for Show all Item.
      */
-    private void findAll(){
-        System.out.println("--------Find All Items--------");
-        for (Item items : this.tracker.findall()){
-            System.out.println(items.toString());
+    private void findAll() {
+        Item[] items = tracker.findall();
+        if (items.length != 0) {
+            System.out.println("-------------Items:------------");
+            for (Item item : items) {
+                System.out.println(item);
+            }
+        } else {
+            System.out.println("***********No Items***********");
         }
+
     }
 
     /**
      * The method for Edit Item.
      */
-    private void editItem(){
+    private void editItem() {
         System.out.println("--------Edit Item--------");
         String id = this.input.ask("Enter an Item id to be replaced : ");
-        String name = this.input.ask("Enter an Item name : ");
-        String desc = this.input.ask("Enter an Item description : ");
-        //String id,String name,String description, long create
-        Item item = new Item(name, desc,System.currentTimeMillis());
+        Item item = tracker.findById(id);
+        System.out.println("Edit item ID" + id);
+        String name = this.input.ask("Enter an Item new name : ");
+        String desc = this.input.ask("Enter an Item new description : ");
+        item.setName(name);
+        item.setDescription(desc);
+        System.out.println("----------Item ID" + item.getId() + "updated successfully");
 
-        if (this.tracker.replace(id, item)) {
-            System.out.println("The Item was replaced !!!");
-        } else {
-            System.out.println("The Item wasn't replaced !!!");
-        }
     }
 
     /**
      * The method for delete Item.
      */
-    private void deleteItem(){
+    private void deleteItem() {
         System.out.println("--------Delete--------");
         String id = this.input.ask("Enter an Item id to be deleted : ");
         if (this.tracker.delete(id)) {
             System.out.println("The item deleted");
         } else {
-        System.out.println("The item wasn't found");
+            System.out.println("The item wasn't found");
         }
     }
 
     /**
      * The method for findItemByID.
      */
-    private void findItemByID(){
-        System.out.println("--------Find Item By ID--------");
-        String id = this.input.ask("Enter an Item id");
-        Item item = this.tracker.findById(id);
-        if (item != null){
-            System.out.println("The current id was founded by id !!!: " + this.tracker.findById(id).toString());
+    private void findItemByID() {
+
+        String id = this.input.ask("-----------Input ID : ----------");
+        Item item = tracker.findById(id);
+        if (item != null) {
+            System.out.println("Item ID " + item.getId() + " Found.\n"
+                    + "Name Item: " + item.getName()
+                    + "\nDescription : " + item.getDescription());
         } else {
-            System.out.println("No Matches");
+            System.out.println("***********Task ID " + id + " not found.***********");
         }
 
     }
@@ -160,16 +167,18 @@ public class StartUI {
     /**
      * The method for findItemsByName.
      */
-    private void findByName(){
-        System.out.println("--------Find Item By Name--------");
-        String name = this.input.ask("Enter an Item Name");
-        Item[] result = this.tracker.findByName(name);
-        for (Item item : result){
-            System.out.println("Item" + item.toString());
+    private void findByName() {
+        String key = this.input.ask("***********Input Name item: ***********");
+        Item[] items = tracker.findByName(key);
+        if (items.length != 0) {
+            for (Item item : items) {
+                System.out.println(item);
+            }
+        } else {
+            System.out.println("----------Name Items  " + key + " not found---------");
         }
+
     }
-
-
 
 
     private void showMenu() {
@@ -187,6 +196,7 @@ public class StartUI {
 
     /**
      * Запускт программы.
+     *
      * @param args
      */
     public static void main(String[] args) {

@@ -5,7 +5,7 @@ package ru.job4j.tracker;
  *
  * @author @author Dmitry Golyshkin (mailerema@gmail.com)
  * @version $Id$
- * @since 19.08.2018
+ * @since 05.10.2018
  */
 
 import java.util.*;
@@ -32,6 +32,7 @@ public class Tracker {
 
     /**
      * The method generate items.
+     * @return unique key.
      */
     private String generateId() {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());
@@ -42,7 +43,7 @@ public class Tracker {
      * @param id of the item
      */
     public boolean delete(String id){
-        for(int i = 0; i < position; i++){
+        for(int i = 0; i != position; i++){
             if (this.items[i] != null && this.items[i].getId().equals(id)) {
                 System.arraycopy(this.items, i + 1, this.items, i, this.items.length - 1 - i);
                 items[position--] = null;
@@ -57,9 +58,8 @@ public class Tracker {
      * @param id of item
      */
     public boolean replace(String id, Item item) {
-        for (int i = 0; i < position; i++) {
-            if (id.equals(items[i].getId())) {
-                item.setId(id);
+        for (int i = 0; i != position; i++) {
+            if (this.items[i].getId().equals(item.getId())) {
                 this.items[i] = item;
                 break;
             }
@@ -93,6 +93,7 @@ public class Tracker {
     /**
      * The method get item by id.
      * @param id item id.
+     * @return -found object
      */
     public Item findById(String id) {
         Item result = null;
