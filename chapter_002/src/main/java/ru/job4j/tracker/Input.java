@@ -7,8 +7,6 @@ package ru.job4j.tracker;
  */
 
 
-public class Input {
-    String ask(String question) {
-        return null;
-    }
+public interface Input {
+    String ask(String question);
 }

@@ -15,6 +15,11 @@ public class Item {
         this.created = created;
     }
 
+    public Item(String test_name, String description) {
+        this.name = test_name;
+        this.description = description;
+    }
+
     public String[] getComments() {
         return comments;
     }

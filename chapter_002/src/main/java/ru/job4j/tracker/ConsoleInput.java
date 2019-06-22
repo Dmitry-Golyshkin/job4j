@@ -6,8 +6,6 @@ package ru.job4j.tracker;
  * @sinse 18.08.18
  */
 
-import com.sun.corba.se.spi.orbutil.fsm.Input;
-
 import java.util.Scanner;
 
 public class ConsoleInput implements Input {
